@@ -409,7 +409,7 @@ const I18N = {
     lim_title:"⚠ Limité par la toiture",
     test_cap_label:"Cuve conseillée trop grande ? Testez une autre capacité (m³)",
     reset_title:"Revenir à la cuve conseillée",
-    cuve_note:"Méthode de Rippl (bilan mensuel). Besoin d'arrosage = évapotranspiration de chaque culture (ET0 × coefficient cultural) moins la pluie ; le besoin est calculé par culture puis additionné. L'hiver tombe naturellement à zéro (pause végétative). En été, les espèces résistantes à la sécheresse (kikuyu, oliviers/figuiers rustiques, massifs méditerranéens) sont calculées en mode survie — arrosage réduit : elles jaunissent puis repartent — ce qui évite de surdimensionner la cuve ; le gazon classique, le potager, le verger et les agrumes/oliviers productifs irrigués restent arrosés à 100 %. En zone méditerranéenne, choisir « Kikuyu / gazon chaud » : il consomme ~30 % de moins qu'un gazon classique. Le volume conseillé couvre l'arrosage en traversant la saison sèche.",
+    cuve_note:"Méthode de Rippl (bilan mensuel). Besoin d'arrosage = évapotranspiration de chaque culture (ET0 × coefficient cultural) moins la pluie ; le besoin est calculé par culture puis additionné. L'hiver tombe naturellement à zéro (pause végétative). En été, les espèces résistantes à la sécheresse (kikuyu, oliviers/figuiers rustiques, massifs et aromatiques méditerranéennes type lavande/thym) sont calculées en mode survie — arrosage réduit : elles jaunissent puis repartent — ce qui évite de surdimensionner la cuve ; le gazon classique, le potager, les fleurs/aromatiques tendres, le verger et les agrumes/oliviers productifs irrigués restent arrosés à 100 %. En zone méditerranéenne, choisir « Kikuyu / gazon chaud » : il consomme ~30 % de moins qu'un gazon classique. Le volume conseillé couvre l'arrosage en traversant la saison sèche.",
     foot_source:"Source : Copernicus ERA5-Land (CDS) · communes © OpenStreetMap",
     ios_hint_html:'📲 Pour installer sur iPhone : touchez <b>Partager</b> (carré avec flèche ↑), puis <b>« Sur l\'écran d\'accueil »</b>. À faire dans <b>Safari</b>.',
     loc_me:"Ma position", loc_map:"Point sur carte",
@@ -426,7 +426,7 @@ const I18N = {
     leg_perso:v=>"Niveau d’une cuve de "+v+" m³ — année sèche",
     leg_reco:"Niveau de la cuve conseillée (m³) — année sèche",
     m3_an:"m³/an", pts_tag:n=>"ERA5-Land — "+n+" points", placeholder_vol:v=>"conseillée : "+v+" m³",
-    plantes:{gazon_froid:"Gazon classique (ray-grass, fétuque)",gazon_chaud:"Kikuyu / gazon chaud (Sud, îles)",potager:"Potager",massifs:"Massifs / arbustes",verger:"Verger / fruitiers irrigués",oliviers:"Oliviers / figuiers (rustiques, non irrigués)",agrumes:"Agrumes / oliviers productifs (irrigués)"}
+    plantes:{gazon_froid:"Gazon classique (ray-grass, fétuque)",gazon_chaud:"Kikuyu / gazon chaud (Sud, îles)",potager:"Potager",massifs:"Massifs / arbustes",aromatiques_med:"Aromatiques méditerranéennes (lavande, thym, romarin)",fleurs:"Fleurs / aromatiques tendres (massif fleuri, basilic)",verger:"Verger / fruitiers irrigués",oliviers:"Oliviers / figuiers (rustiques, non irrigués)",agrumes:"Agrumes / oliviers productifs (irrigués)"}
   },
   de:{
     subtitle:"Hilfe zur Dimensionierung der Regenwassernutzung",
@@ -457,7 +457,7 @@ const I18N = {
     lim_title:"⚠ Durch das Dach begrenzt",
     test_cap_label:"Empfohlener Tank zu groß? Andere Kapazität testen (m³)",
     reset_title:"Zurück zum empfohlenen Tank",
-    cuve_note:"Rippl-Methode (Monatsbilanz). Bewässerungsbedarf = Verdunstung jeder Kultur (ET0 × Kulturkoeffizient) minus Niederschlag; der Bedarf wird je Kultur berechnet und addiert. Im Winter fällt er natürlich auf null (Vegetationsruhe). Im Sommer werden trockenheitsresistente Arten (Kikuyu, trockene Oliven/Feigen, mediterrane Sträucher) im Überlebensmodus berechnet — reduzierte Bewässerung: sie vergilben und treiben wieder aus — um die Zisterne nicht zu überdimensionieren; klassischer Rasen, Gemüse- und Obstgarten sowie bewässerte Ertrags-Zitrus/-Oliven bleiben zu 100 % bewässert. In mediterranen Lagen „Kikuyu / Warmrasen“ wählen: er verbraucht ~30 % weniger als klassischer Rasen. Das empfohlene Volumen deckt die Bewässerung über die Trockenzeit.",
+    cuve_note:"Rippl-Methode (Monatsbilanz). Bewässerungsbedarf = Verdunstung jeder Kultur (ET0 × Kulturkoeffizient) minus Niederschlag; der Bedarf wird je Kultur berechnet und addiert. Im Winter fällt er natürlich auf null (Vegetationsruhe). Im Sommer werden trockenheitsresistente Arten (Kikuyu, trockene Oliven/Feigen, mediterrane Sträucher und Kräuter wie Lavendel/Thymian) im Überlebensmodus berechnet — reduzierte Bewässerung: sie vergilben und treiben wieder aus — um die Zisterne nicht zu überdimensionieren; klassischer Rasen, Gemüsegarten, Blumen/zarte Kräuter, Obstgarten sowie bewässerte Ertrags-Zitrus/-Oliven bleiben zu 100 % bewässert. In mediterranen Lagen „Kikuyu / Warmrasen“ wählen: er verbraucht ~30 % weniger als klassischer Rasen. Das empfohlene Volumen deckt die Bewässerung über die Trockenzeit.",
     foot_source:"Quelle: Copernicus ERA5-Land (CDS) · Gemeinden © OpenStreetMap",
     ios_hint_html:'📲 Installation auf dem iPhone: <b>Teilen</b> antippen (Quadrat mit Pfeil ↑), dann <b>„Zum Home-Bildschirm“</b>. In <b>Safari</b> ausführen.',
     loc_me:"Mein Standort", loc_map:"Punkt auf Karte",
@@ -474,7 +474,7 @@ const I18N = {
     leg_perso:v=>"Füllstand eines Tanks von "+v+" m³ — Trockenjahr",
     leg_reco:"Füllstand des empfohlenen Tanks (m³) — Trockenjahr",
     m3_an:"m³/Jahr", pts_tag:n=>"ERA5-Land — "+n+" Punkte", placeholder_vol:v=>"empfohlen: "+v+" m³",
-    plantes:{gazon_froid:"Klassischer Rasen (Weidelgras, Schwingel)",gazon_chaud:"Kikuyu / Warmrasen (Süden, Inseln)",potager:"Gemüsegarten",massifs:"Beete / Sträucher",verger:"Obstgarten / bewässerte Obstbäume",oliviers:"Oliven / Feigen (trocken, ohne Bewässerung)",agrumes:"Zitrus / Ertrags-Oliven (bewässert)"}
+    plantes:{gazon_froid:"Klassischer Rasen (Weidelgras, Schwingel)",gazon_chaud:"Kikuyu / Warmrasen (Süden, Inseln)",potager:"Gemüsegarten",massifs:"Beete / Sträucher",aromatiques_med:"Mediterrane Kräuter (Lavendel, Thymian, Rosmarin)",fleurs:"Blumen / zarte Kräuter (Blumenbeet, Basilikum)",verger:"Obstgarten / bewässerte Obstbäume",oliviers:"Oliven / Feigen (trocken, ohne Bewässerung)",agrumes:"Zitrus / Ertrags-Oliven (bewässert)"}
   },
   it:{
     subtitle:"Aiuto al dimensionamento del recupero dell'acqua piovana",
@@ -505,7 +505,7 @@ const I18N = {
     lim_title:"⚠ Limitato dal tetto",
     test_cap_label:"Cisterna consigliata troppo grande? Prova un'altra capacità (m³)",
     reset_title:"Torna alla cisterna consigliata",
-    cuve_note:"Metodo di Rippl (bilancio mensile). Fabbisogno d'irrigazione = evapotraspirazione di ogni coltura (ET0 × coefficiente colturale) meno la pioggia; il fabbisogno è calcolato per coltura e poi sommato. In inverno scende naturalmente a zero (riposo vegetativo). In estate le specie resistenti alla siccità (kikuyu, olivi/fichi rustici, arbusti mediterranei) sono calcolate in modalità sopravvivenza — irrigazione ridotta: ingialliscono e poi ripartono — per non sovradimensionare la cisterna; prato classico, orto, frutteto e agrumi/olivi produttivi irrigati restano irrigati al 100 %. In zona mediterranea scegliere « Kikuyu / prato caldo »: consuma ~30 % in meno di un prato classico. Il volume consigliato copre l'irrigazione attraversando la stagione secca.",
+    cuve_note:"Metodo di Rippl (bilancio mensile). Fabbisogno d'irrigazione = evapotraspirazione di ogni coltura (ET0 × coefficiente colturale) meno la pioggia; il fabbisogno è calcolato per coltura e poi sommato. In inverno scende naturalmente a zero (riposo vegetativo). In estate le specie resistenti alla siccità (kikuyu, olivi/fichi rustici, arbusti e aromatiche mediterranee come lavanda/timo) sono calcolate in modalità sopravvivenza — irrigazione ridotta: ingialliscono e poi ripartono — per non sovradimensionare la cisterna; prato classico, orto, fiori/aromatiche tenere, frutteto e agrumi/olivi produttivi irrigati restano irrigati al 100 %. In zona mediterranea scegliere « Kikuyu / prato caldo »: consuma ~30 % in meno di un prato classico. Il volume consigliato copre l'irrigazione attraversando la stagione secca.",
     foot_source:"Fonte: Copernicus ERA5-Land (CDS) · comuni © OpenStreetMap",
     ios_hint_html:'📲 Per installare su iPhone: tocca <b>Condividi</b> (quadrato con freccia ↑), poi <b>« Aggiungi a Home »</b>. Da fare in <b>Safari</b>.',
     loc_me:"La mia posizione", loc_map:"Punto sulla mappa",
@@ -522,7 +522,7 @@ const I18N = {
     leg_perso:v=>"Livello di una cisterna di "+v+" m³ — anno secco",
     leg_reco:"Livello della cisterna consigliata (m³) — anno secco",
     m3_an:"m³/anno", pts_tag:n=>"ERA5-Land — "+n+" punti", placeholder_vol:v=>"consigliata: "+v+" m³",
-    plantes:{gazon_froid:"Prato classico (loietto, festuca)",gazon_chaud:"Kikuyu / prato caldo (Sud, isole)",potager:"Orto",massifs:"Aiuole / arbusti",verger:"Frutteto / alberi da frutto irrigati",oliviers:"Olivi / fichi (rustici, non irrigati)",agrumes:"Agrumi / olivi produttivi (irrigati)"}
+    plantes:{gazon_froid:"Prato classico (loietto, festuca)",gazon_chaud:"Kikuyu / prato caldo (Sud, isole)",potager:"Orto",massifs:"Aiuole / arbusti",aromatiques_med:"Aromatiche mediterranee (lavanda, timo, rosmarino)",fleurs:"Fiori / aromatiche tenere (aiuola fiorita, basilico)",verger:"Frutteto / alberi da frutto irrigati",oliviers:"Olivi / fichi (rustici, non irrigati)",agrumes:"Agrumi / olivi produttivi (irrigati)"}
   }
 };
 I18N.fr.app_title="Profil pluviométrique";
@@ -742,6 +742,8 @@ const KC = {
   gazon_chaud: [0.3, 0.3, 0.4, 0.5, 0.55,0.6,  0.65,0.65,0.6, 0.5, 0.4, 0.3],
   potager:     [0,   0,   0.3, 0.5, 0.7, 0.9,  1.05,1.0, 0.7, 0.3, 0,   0  ],
   massifs:     [0.2, 0.2, 0.3, 0.4, 0.5, 0.5,  0.5, 0.5, 0.4, 0.3, 0.2, 0.2],
+  aromatiques_med:[0.2,0.2,0.25,0.3,0.35,0.35, 0.35,0.35,0.3, 0.3, 0.25,0.2], // lavande/thym/romarin : garrigue, aiment le sec
+  fleurs:      [0,   0,   0.4, 0.6, 0.8, 0.9,  0.95,0.9, 0.7, 0.4, 0,   0  ], // massif fleuri/basilic : gourmand comme potager
   verger:      [0,   0,   0.4, 0.6, 0.7, 0.8,  0.85,0.8, 0.6, 0.4, 0,   0  ],
   oliviers:    [0.45,0.45,0.5, 0.55,0.6, 0.65, 0.65,0.65,0.6, 0.55,0.5, 0.45],
   agrumes:     [0.6, 0.6, 0.65,0.65,0.7, 0.7,  0.7, 0.7, 0.7, 0.65,0.65,0.6 ]
@@ -755,12 +757,14 @@ const KS_ETE = {
   gazon_chaud: 0.40,   // kikuyu/bermuda : brunit puis reverdit aux pluies d'automne
   potager:     1,
   massifs:     0.50,   // arbustes mediterraneens etablis
+  aromatiques_med: 0.40, // lavande/thym/romarin : tres resistants au sec, conduits en survie
+  fleurs:      1,      // massif fleuri/aromatiques tendres : pas de tolerance secheresse -> plein
   verger:      1,      // on arrose pour la fructification
   oliviers:    0.35,   // olivier/figuier rustique sec etabli : tres sobre
   agrumes:     1       // agrumes/oliviers PRODUCTIFS irrigues : arrosage plein pour le fruit
 };
 const MOIS_ETE = [5,6,7,8]; // Juin, Juillet, Aout, Septembre (index 0-based)
-const PLANTE_KEYS = ['gazon_froid','gazon_chaud','potager','massifs','verger','oliviers','agrumes'];
+const PLANTE_KEYS = ['gazon_froid','gazon_chaud','potager','massifs','aromatiques_med','fleurs','verger','oliviers','agrumes'];
 function optionsHTML(){
   const p = t('plantes');
   return PLANTE_KEYS.map(k=>'<option value="'+k+'">'+p[k]+'</option>').join('');
