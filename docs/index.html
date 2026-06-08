@@ -212,6 +212,20 @@
   .add-zone{width:100%;border:1px dashed #7dcca0;border-radius:10px;padding:9px;
     background:#f6f9fc;color:var(--bar);font-weight:600;font-size:12.5px;cursor:pointer}
   .add-zone:active{background:#eaf7ee}
+  /* ── Layout bureau (≥ 768 px) ──────────────────────────────── */
+  @media (min-width:768px){
+    body{ padding:24px 32px; }
+    .phone{ max-width:1080px; }
+    #map{ height:360px; }
+    .chart{ height:320px; }
+    .tab-layout{
+      display:grid;
+      grid-template-columns:300px 1fr;
+      align-items:stretch;
+    }
+    .tab-left{ grid-column:1; grid-row:1; border-right:1px solid var(--line); }
+    .tab-right{ grid-column:2; grid-row:1; }
+  }
 </style>
 </head>
 <body>
@@ -244,6 +258,9 @@
   </div>
 
   <div id="tabPluie">
+  <div class="tab-layout">
+
+  <div class="tab-right">
   <div class="windows" id="windows">
     <button data-w="ref" class="active"><span class="big">1995→2020</span><span data-i18n="win_ref_sub"></span></button>
     <button data-w="recente"><span class="big" data-i18n="win_rec_big"></span><span data-i18n="win_rec_sub"></span></button>
@@ -276,7 +293,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /tab-right -->
 
+  <div class="tab-left">
   <div class="meta">
     <div class="row"><span data-i18n="meta_commune"></span><b id="communeLine">—</b></div>
     <div class="row"><span data-i18n="meta_point"></span><b id="mailleId">ERA5-Land</b></div>
@@ -289,9 +308,15 @@
     <b data-i18n="warn_rain_title"></b>
     <span data-i18n="warn_rain_txt"></span>
   </div>
+  </div><!-- /tab-left -->
+
+  </div><!-- /tab-layout -->
   </div><!-- /tabPluie -->
 
   <div id="tabCuve" hidden>
+  <div class="tab-layout">
+
+  <div class="tab-left">
     <div class="cuve-form">
       <div class="field">
         <label data-i18n="roof_label"></label>
@@ -311,7 +336,9 @@
         <button id="cAddZone" type="button" class="add-zone" data-i18n="add_culture"></button>
       </div>
     </div>
+  </div><!-- /tab-left -->
 
+  <div class="tab-right">
     <div class="cuve-res">
       <div class="reco-head">
         <span class="k" data-i18n="reco_vol"></span>
@@ -364,6 +391,9 @@
     </div>
 
     <div class="cuve-note" data-i18n="cuve_note"></div>
+  </div><!-- /tab-right -->
+
+  </div><!-- /tab-layout -->
   </div><!-- /tabCuve -->
 
   <footer>
