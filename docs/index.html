@@ -119,6 +119,7 @@
     position:absolute;top:-15px;left:50%;transform:translateX(-50%);
     font-size:8.5px;color:var(--muted);white-space:nowrap;
   }
+  .bar-dry{position:absolute;bottom:0;left:0;right:0;background:rgba(255,210,40,.55);pointer-events:none}
   .xlabels{display:flex;gap:5px;padding:6px 0 0 4px}
   .xlabels span{flex:1;text-align:center;font-size:9.5px;color:var(--muted)}
   .legend{display:flex;gap:16px;justify-content:center;padding:8px 0 2px;font-size:11px;color:var(--muted)}
@@ -254,6 +255,7 @@
     <div class="xlabels" id="xlabels"></div>
     <div class="legend">
       <span><i style="background:var(--bar)"></i><span data-i18n="legend_mean"></span></span>
+      <span><i style="background:rgba(255,210,40,.7)"></i><span data-i18n="legend_dry"></span></span>
       <span><i style="background:var(--band)"></i><span data-i18n="legend_band"></span></span>
     </div>
   </div>
@@ -391,7 +393,7 @@ const I18N = {
     note_ref:"Période de référence 1995-2020 (réglage par défaut).",
     note_rec:"Les 15 dernières années — climat actuel.",
     years_suffix:"années", recent_15:"15 dernières années",
-    legend_mean:"Pluie moyenne (mm)", legend_band:"Année sèche → humide",
+    legend_mean:"Pluie moyenne (mm)", legend_dry:"Minimum année sèche (P10)", legend_band:"Plage normale (P10→P90)",
     recap_annual:"Pluie totale / an (moyenne)", recap_dry:"Année sèche (1 sur 10)",
     recap_wet:"Année humide (1 sur 10)",
     meta_commune:"Commune", meta_point:"Point météo", meta_center:"Centre · altitude",
@@ -439,7 +441,7 @@ const I18N = {
     note_ref:"Referenzzeitraum 1995-2020 (Standard).",
     note_rec:"Die letzten 15 Jahre — aktuelles Klima.",
     years_suffix:"Jahre", recent_15:"letzte 15 Jahre",
-    legend_mean:"Mittlerer Niederschlag (mm)", legend_band:"Trockenes → feuchtes Jahr",
+    legend_mean:"Mittlerer Niederschlag (mm)", legend_dry:"Minimum Trockenjahr (P10)", legend_band:"Normalbereich (P10→P90)",
     recap_annual:"Gesamtniederschlag / Jahr (Mittel)", recap_dry:"Trockenes Jahr (1 von 10)",
     recap_wet:"Feuchtes Jahr (1 von 10)",
     meta_commune:"Gemeinde", meta_point:"Wetterpunkt", meta_center:"Zentrum · Höhe",
@@ -487,7 +489,7 @@ const I18N = {
     note_ref:"Periodo di riferimento 1995-2020 (predefinito).",
     note_rec:"Gli ultimi 15 anni — clima attuale.",
     years_suffix:"anni", recent_15:"ultimi 15 anni",
-    legend_mean:"Pioggia media (mm)", legend_band:"Anno secco → umido",
+    legend_mean:"Pioggia media (mm)", legend_dry:"Minimo anno secco (P10)", legend_band:"Intervallo normale (P10→P90)",
     recap_annual:"Pioggia totale / anno (media)", recap_dry:"Anno secco (1 su 10)",
     recap_wet:"Anno umido (1 su 10)",
     meta_commune:"Comune", meta_point:"Punto meteo", meta_center:"Centro · quota",
@@ -610,6 +612,11 @@ function render(winKey){
       const val=document.createElement('div'); val.className='val';
       val.textContent=Math.round(m);
       bar.appendChild(val);
+      if(p10[i]!=null && p10[i]>0){
+        const dryPart=document.createElement('div'); dryPart.className='bar-dry';
+        dryPart.style.height=(p10[i]/m*100).toFixed(1)+'%';
+        bar.appendChild(dryPart);
+      }
       col.appendChild(bar);
     }
     chart.appendChild(col);
