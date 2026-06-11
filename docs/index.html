@@ -449,6 +449,7 @@ const I18N = {
     err_load:e=>"Erreur de chargement ("+e+")",
     gps_no:"GPS non disponible sur ce navigateur.",
     gps_fail:m=>"Position refusée ou indisponible ("+m+").",
+    no_data_here:"Pas de donnée ici", out_of_zone:"Hors zone ERA5-Land",
     et0_na:"Données ET0 indisponibles pour ce point",
     cov_full:"couvre tout l’arrosage une année normale",
     cov_part:p=>"couvre "+p+"% de l’arrosage une année normale",
@@ -497,6 +498,7 @@ const I18N = {
     err_load:e=>"Ladefehler ("+e+")",
     gps_no:"GPS in diesem Browser nicht verfügbar.",
     gps_fail:m=>"Standort abgelehnt oder nicht verfügbar ("+m+").",
+    no_data_here:"Keine Daten hier", out_of_zone:"Außerhalb ERA5-Land-Abdeckung",
     et0_na:"ET0-Daten für diesen Punkt nicht verfügbar",
     cov_full:"deckt die gesamte Bewässerung in einem normalen Jahr",
     cov_part:p=>"deckt "+p+"% der Bewässerung in einem normalen Jahr",
@@ -545,6 +547,7 @@ const I18N = {
     err_load:e=>"Errore di caricamento ("+e+")",
     gps_no:"GPS non disponibile su questo browser.",
     gps_fail:m=>"Posizione rifiutata o non disponibile ("+m+").",
+    no_data_here:"Nessun dato qui", out_of_zone:"Fuori zona ERA5-Land",
     et0_na:"Dati ET0 non disponibili per questo punto",
     cov_full:"copre tutta l'irrigazione in un anno normale",
     cov_part:p=>"copre il "+p+"% dell'irrigazione in un anno normale",
@@ -604,6 +607,7 @@ const WIN = { ref:"ref_1995_2020", recente:"recente" };
 let JEU = null;          // point actuellement affiche
 let currentWin = 'ref';
 let MAILLES = [];        // [{id, lat, lon, data}]
+const MAX_SELECTION_KM = 30; // refuse les points clairement hors zone ERA5-Land
 
 function pctFactory(ymax){ return v => (v/ymax*100); }
 
@@ -724,9 +728,29 @@ function reverseCommune(lat, lon){
 }
 
 let reqSeq = 0;
+function clearSelection(lat, lon, label){
+  JEU = null;
+  reqSeq++;
+  setLoc(t('no_data_here'), label || (lat.toFixed(3)+', '+lon.toFixed(3)));
+  document.getElementById('communeLine').textContent = '—';
+  document.getElementById('mailleId').textContent = t('out_of_zone');
+  document.getElementById('mailleCoord').textContent = lat.toFixed(3)+', '+lon.toFixed(3);
+  document.getElementById('periode').textContent = '—';
+  document.getElementById('chart').innerHTML = '';
+  document.getElementById('cuveChart').innerHTML = '';
+  ['annuel','seche','humide','volReco','covReco','covMoyen','covSeche','ctxRecup','ctxBesoin','ctxPeriode']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.textContent = '—'; });
+  ['cuveSecure','cuveLimite','cVolPersoRes','ctxGainRow','ctxNetRow']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.hidden = true; });
+  if(marker && map){ map.removeLayer(marker); marker = null; }
+}
+
 function selectPoint(lat, lon, label){
   const {maille, dist} = findMaille(lat, lon);
-  if(!maille) return;
+  if(!maille || dist > MAX_SELECTION_KM){
+    clearSelection(lat, lon, label);
+    return;
+  }
   JEU = maille.data;
   document.getElementById('communeLine').textContent = '—';
   document.getElementById('mailleId').textContent = 'ERA5-Land — '+maille.id;
