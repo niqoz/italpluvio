@@ -44,13 +44,17 @@ Le DE cible le Haut-Adige/Tyrol du Sud (Bolzano).
 ## Régénérer les données
 
 ```bash
-# Pré-requis : venv avec cdsapi xarray netcdf4 numpy + compte Copernicus + ~/.cdsapirc
-cd ../pluvio   # le pipeline est dans le repo pluvio
+# Pré-requis (une fois) : venv local + compte Copernicus gratuit + ~/.cdsapirc
+python3 -m venv .venv && .venv/bin/pip install cdsapi xarray netcdf4 numpy
+
 .venv/bin/python pipeline/build_italie_cds.py --selftest   # valide la formule ET0 FAO-56
 .venv/bin/python pipeline/build_italie_cds.py --download    # télécharge le NetCDF ERA5-Land (~44 Mo)
 .venv/bin/python pipeline/build_italie_cds.py               # agrège -> docs/normales_italie.json
 # Incrémenter CACHE dans docs/sw.js, puis commit/push
 ```
+
+> Les scripts `pipeline/` vivent dans **ce** repo (rapatriés depuis pluvio en juin 2026) ;
+> `pipeline/build_italie.py` (voie Open-Meteo point par point) est conservé comme repli historique.
 
 ## Licences / attribution
 
