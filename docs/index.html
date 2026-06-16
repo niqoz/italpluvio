@@ -203,6 +203,11 @@
     border:4px solid transparent;border-top-color:var(--ink);
   }
   .bar-tip.on{display:block}
+  .cuve-bars{position:relative;width:100%;height:100%;display:flex;align-items:flex-end;gap:2px;cursor:pointer}
+  .cuve-bars .bar{flex:1;min-width:0}
+  .cuve-bar-normal{background:linear-gradient(180deg,#cfe2fb,var(--bar2))}
+  .cuve-bar-sec{background:linear-gradient(180deg,var(--bar),#2566c4)}
+  .col > .bar-tip{top:8px;bottom:auto;line-height:1.35;text-align:left}
   .zone-row{display:flex;gap:8px;margin-bottom:6px;align-items:center}
   .zone-row .z-surf{width:78px;flex:none}
   .zone-row .z-type{flex:1;min-width:0;width:auto}
@@ -387,6 +392,7 @@
       <div class="xlabels" id="xlabels2"></div>
       <div class="legend">
         <span><i style="background:var(--bar)"></i><span id="cuveLegend"></span></span>
+        <span><i style="background:var(--bar2)"></i><span data-i18n="cuve_legend_normal"></span></span>
       </div>
     </div>
 
@@ -423,7 +429,7 @@ const I18N = {
     note_ref:"Période de référence 1995-2020 (réglage par défaut).",
     note_rec:"Les 15 dernières années — climat actuel.",
     years_suffix:"années", recent_15:"15 dernières années",
-    legend_mean:"Pluie moyenne (mm)", legend_dry:"Minimum année sèche (P10)", legend_band:"Plage normale (P10→P90)",
+    legend_mean:"Pluie moyenne (mm)", legend_dry:"Seuil sec (1 année sur 10)", legend_band:"Fourchette habituelle (8 années sur 10)",
     recap_annual:"Pluie totale / an (moyenne)", recap_dry:"Année sèche (1 sur 10)",
     recap_wet:"Année humide (1 sur 10)",
     meta_commune:"Commune", meta_point:"Point météo", meta_center:"Centre · altitude",
@@ -456,8 +462,10 @@ const I18N = {
     lim_txt:"Une année sèche, la pluie de ce toit ne suffit pas à couvrir tout l’arrosage : une cuve plus grande n’y change rien (elle déborderait l’hiver). Pour gagner en autonomie : plus de surface de toit, ou moins de surface arrosée.",
     secure:v=>"Pour rester à <b>100 % même une année sèche</b>, prévoir <b>"+v+" m³</b>.",
     sim_res:(v,a,b)=>"Une cuve de <b>"+v+" m³</b> couvre <b>"+a+" %</b> de l’arrosage une année normale et <b>"+b+" %</b> une année sèche.",
-    leg_perso:v=>"Niveau d’une cuve de "+v+" m³ — année sèche",
-    leg_reco:"Niveau de la cuve conseillée (m³) — année sèche",
+    leg_perso:v=>"Niveau sec — cuve "+v+" m³",
+    leg_reco:"Niveau sec — cuve conseillée",
+    cuve_legend_normal:"Niveau année normale",
+    tip_normal:"Normale", tip_dry:"Sèche",
     m3_an:"m³/an", pts_tag:n=>"ERA5-Land — "+n+" points", placeholder_vol:v=>"conseillée : "+v+" m³",
     plantes:{gazon_froid:"Gazon classique (ray-grass, fétuque)",gazon_chaud:"Kikuyu / gazon chaud (Sud, îles)",potager:"Potager",massifs:"Massifs / arbustes",aromatiques_med:"Aromatiques méditerranéennes (lavande, thym, romarin)",fleurs:"Fleurs / aromatiques tendres (massif fleuri, basilic)",verger:"Verger / fruitiers irrigués",oliviers:"Oliviers / figuiers (rustiques, non irrigués)",agrumes:"Agrumes / oliviers productifs (irrigués)"}
   },
@@ -472,7 +480,7 @@ const I18N = {
     note_ref:"Referenzzeitraum 1995-2020 (Standard).",
     note_rec:"Die letzten 15 Jahre — aktuelles Klima.",
     years_suffix:"Jahre", recent_15:"letzte 15 Jahre",
-    legend_mean:"Mittlerer Niederschlag (mm)", legend_dry:"Minimum Trockenjahr (P10)", legend_band:"Normalbereich (P10→P90)",
+    legend_mean:"Mittlerer Niederschlag (mm)", legend_dry:"Trockenschwelle (1 Jahr von 10)", legend_band:"Üblicher Bereich (8 Jahre von 10)",
     recap_annual:"Gesamtniederschlag / Jahr (Mittel)", recap_dry:"Trockenes Jahr (1 von 10)",
     recap_wet:"Feuchtes Jahr (1 von 10)",
     meta_commune:"Gemeinde", meta_point:"Wetterpunkt", meta_center:"Zentrum · Höhe",
@@ -505,8 +513,10 @@ const I18N = {
     lim_txt:"In einem Trockenjahr reicht der Regen dieses Daches nicht für die gesamte Bewässerung: ein größerer Tank ändert daran nichts (er würde im Winter überlaufen). Für mehr Autonomie: mehr Dachfläche oder weniger bewässerte Fläche.",
     secure:v=>"Um auch in einem Trockenjahr bei <b>100 %</b> zu bleiben, <b>"+v+" m³</b> vorsehen.",
     sim_res:(v,a,b)=>"Ein Tank von <b>"+v+" m³</b> deckt <b>"+a+" %</b> der Bewässerung in einem normalen Jahr und <b>"+b+" %</b> in einem Trockenjahr.",
-    leg_perso:v=>"Füllstand eines Tanks von "+v+" m³ — Trockenjahr",
-    leg_reco:"Füllstand des empfohlenen Tanks (m³) — Trockenjahr",
+    leg_perso:v=>"Füllstand trocken — Tank "+v+" m³",
+    leg_reco:"Füllstand trocken — empfohlener Tank",
+    cuve_legend_normal:"Füllstand normales Jahr",
+    tip_normal:"Normal", tip_dry:"Trocken",
     m3_an:"m³/Jahr", pts_tag:n=>"ERA5-Land — "+n+" Punkte", placeholder_vol:v=>"empfohlen: "+v+" m³",
     plantes:{gazon_froid:"Klassischer Rasen (Weidelgras, Schwingel)",gazon_chaud:"Kikuyu / Warmrasen (Süden, Inseln)",potager:"Gemüsegarten",massifs:"Beete / Sträucher",aromatiques_med:"Mediterrane Kräuter (Lavendel, Thymian, Rosmarin)",fleurs:"Blumen / zarte Kräuter (Blumenbeet, Basilikum)",verger:"Obstgarten / bewässerte Obstbäume",oliviers:"Oliven / Feigen (trocken, ohne Bewässerung)",agrumes:"Zitrus / Ertrags-Oliven (bewässert)"}
   },
@@ -521,7 +531,7 @@ const I18N = {
     note_ref:"Periodo di riferimento 1995-2020 (predefinito).",
     note_rec:"Gli ultimi 15 anni — clima attuale.",
     years_suffix:"anni", recent_15:"ultimi 15 anni",
-    legend_mean:"Pioggia media (mm)", legend_dry:"Minimo anno secco (P10)", legend_band:"Intervallo normale (P10→P90)",
+    legend_mean:"Pioggia media (mm)", legend_dry:"Soglia secca (1 anno su 10)", legend_band:"Intervallo abituale (8 anni su 10)",
     recap_annual:"Pioggia totale / anno (media)", recap_dry:"Anno secco (1 su 10)",
     recap_wet:"Anno umido (1 su 10)",
     meta_commune:"Comune", meta_point:"Punto meteo", meta_center:"Centro · quota",
@@ -554,8 +564,10 @@ const I18N = {
     lim_txt:"In un anno secco la pioggia di questo tetto non basta a coprire tutta l'irrigazione: una cisterna più grande non cambia nulla (traboccherebbe d'inverno). Per più autonomia: più superficie di tetto, o meno superficie irrigata.",
     secure:v=>"Per restare al <b>100 % anche in un anno secco</b>, prevedere <b>"+v+" m³</b>.",
     sim_res:(v,a,b)=>"Una cisterna di <b>"+v+" m³</b> copre il <b>"+a+" %</b> dell'irrigazione in un anno normale e il <b>"+b+" %</b> in un anno secco.",
-    leg_perso:v=>"Livello di una cisterna di "+v+" m³ — anno secco",
-    leg_reco:"Livello della cisterna consigliata (m³) — anno secco",
+    leg_perso:v=>"Livello secco — cisterna "+v+" m³",
+    leg_reco:"Livello secco — cisterna consigliata",
+    cuve_legend_normal:"Livello anno normale",
+    tip_normal:"Normale", tip_dry:"Secco",
     m3_an:"m³/anno", pts_tag:n=>"ERA5-Land — "+n+" punti", placeholder_vol:v=>"consigliata: "+v+" m³",
     plantes:{gazon_froid:"Prato classico (loietto, festuca)",gazon_chaud:"Kikuyu / prato caldo (Sud, isole)",potager:"Orto",massifs:"Aiuole / arbusti",aromatiques_med:"Aromatiche mediterranee (lavanda, timo, rosmarino)",fleurs:"Fiori / aromatiche tenere (aiuola fiorita, basilico)",verger:"Frutteto / alberi da frutto irrigati",oliviers:"Olivi / fichi (rustici, non irrigati)",agrumes:"Agrumi / olivi produttivi (irrigati)"}
   }
@@ -871,6 +883,7 @@ function dimensionne(apport, besoin){
 
 function fmtVol(v){ return v>=10 ? String(Math.round(v)) : String(Math.round(v*2)/2).replace('.', ','); }
 function fmtM3(v){ return (Math.round(v*10)/10).toFixed(1).replace('.', ',') + ' ' + t('m3_an'); }
+function fmtM3Level(v){ return (Math.round(v*10)/10).toFixed(1).replace('.', ',') + ' m³'; }
 
 function niceStep(ymax){
   const raw = ymax/4 || 1;
@@ -879,10 +892,10 @@ function niceStep(ymax){
   return (m*pow) || 1;
 }
 
-function renderFillChart(niveaux, cap){
+function renderFillChart(niveauxSec, niveauxNorm, cap){
   const chart = document.getElementById('cuveChart');
   chart.innerHTML = '';
-  const YMAX = Math.max(cap, ...niveaux, 0.1);
+  const YMAX = Math.max(cap, ...niveauxSec, ...niveauxNorm, 0.1);
   const step = niceStep(YMAX);
   const pct = v => v/YMAX*100;
   for(let g=0; g<=YMAX+1e-9; g+=step){
@@ -891,19 +904,27 @@ function renderFillChart(niveaux, cap){
     lab.textContent = g>=10 ? Math.round(g) : Math.round(g*10)/10;
     chart.appendChild(line); chart.appendChild(lab);
   }
-  niveaux.forEach(n=>{
+  niveauxSec.forEach((nSec, i)=>{
+    const nNorm = niveauxNorm[i] || 0;
     const col = document.createElement('div'); col.className='col';
-    const bar = document.createElement('div'); bar.className='bar'; bar.style.height=pct(n)+'%';
+    const bars = document.createElement('div'); bars.className='cuve-bars';
+    const barNorm = document.createElement('div'); barNorm.className='bar cuve-bar-normal';
+    barNorm.style.height=pct(nNorm)+'%';
+    const barSec = document.createElement('div'); barSec.className='bar cuve-bar-sec';
+    barSec.style.height=pct(nSec)+'%';
     const tip = document.createElement('div'); tip.className='bar-tip';
-    tip.textContent = (cap > 0 ? Math.round(n/cap*100) : 0) + ' %';
-    bar.appendChild(tip);
-    bar.addEventListener('click', e=>{
+    tip.innerHTML = t('tip_normal')+'&nbsp;: '+fmtM3Level(nNorm)+' · '+(cap > 0 ? Math.round(nNorm/cap*100) : 0)+' %<br>'+
+      t('tip_dry')+'&nbsp;: '+fmtM3Level(nSec)+' · '+(cap > 0 ? Math.round(nSec/cap*100) : 0)+' %';
+    bars.appendChild(barNorm);
+    bars.appendChild(barSec);
+    col.appendChild(tip);
+    bars.addEventListener('click', e=>{
       e.stopPropagation();
       const wasOn = tip.classList.contains('on');
       chart.querySelectorAll('.bar-tip.on').forEach(t=>t.classList.remove('on'));
       if(!wasOn) tip.classList.add('on');
     });
-    col.appendChild(bar); chart.appendChild(col);
+    col.appendChild(bars); chart.appendChild(col);
   });
 }
 // fermeture des infobulles au clic hors barre (UNE seule fois, pas a chaque rendu)
@@ -995,7 +1016,11 @@ function renderCuve(){
     lg.textContent = t('leg_reco');
   }
 
-  renderFillChart(simulCuve(volAff, sSec.apport, sSec.besoin).niveaux, volAff);
+  renderFillChart(
+    simulCuve(volAff, sSec.apport, sSec.besoin).niveaux,
+    simulCuve(volAff, sMoy.apport, sMoy.besoin).niveaux,
+    volAff
+  );
 }
 
 // --- Gestion des zones de culture ---
